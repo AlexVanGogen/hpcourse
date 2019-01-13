@@ -222,12 +222,12 @@ int run_threads() {
 	int* sum;
 	int result = 0;
 	pthread_join(producer, nullptr);
+	pthread_join(interruptor, nullptr);
 	for (int i = 0; i < N; ++i) {
 		pthread_join(consumers[i].consumer(), (void**)(&sum));
 		std::cout << "Consumer " << i << " delivered sum " << *sum << std::endl;
 		result += *sum;
 	}
-	pthread_join(interruptor, nullptr);
 	delete sum;
 	return result;
 }
